@@ -1,0 +1,11 @@
+﻿create procedure all_info
+as
+begin
+select * from Clients
+select * from Orders
+select * from ComputerOrders
+select * from Computers
+select * from Statuses
+select * from ReportOrders
+select * from Reports
+end;

@@ -31,12 +31,8 @@ namespace Server_v0._0
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Clients/Error");
-                app.UseHsts();
-            }
-            app.UseHttpsRedirection();
+
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -47,23 +43,11 @@ namespace Server_v0._0
             {
                 //endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllerRoute(
-                    name: "MyArea",
-                    pattern: "{area:exists}/{controller=Orders}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Clients}/{action=Index}/{id?}");
+                    pattern: "{controller=Drivers}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
-                    name: "MyArea",
-                    pattern: "{controller=Orders}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                    name: "MyArea",
-                    pattern: "{controller=Statuses}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                    name: "MyArea",
-                    pattern: "{controller=Computers}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                    name: "MyArea",
-                    pattern: "{controller=Reports}/{action=Index}/{id?}");
+                    name: "My",
+                    pattern: "{controller=Payments}/{action=Index}/{id?}");
             });
         }
     }

@@ -1,0 +1,8 @@
+﻿create trigger create_report
+on Orders
+after insert
+as
+insert Reports (Date,IsDeleted)
+values(GETDATE(),0)
+insert ReportOrders(orderid,reportid)
+values((select orderid from inserted),(select top(1) reportid from reports order by date desc))

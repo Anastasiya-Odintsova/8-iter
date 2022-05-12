@@ -1,0 +1,9 @@
+﻿create trigger discount_when_buying_3_computers
+on ComputerOrders
+after insert,update
+as
+update Orders
+set price=price*0.87
+where (select sum(Count) from ComputerOrders
+where orderid=(select orderid from inserted))>2
+and orderid=(select orderid from inserted)

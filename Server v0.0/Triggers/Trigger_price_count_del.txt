@@ -1,0 +1,15 @@
+﻿create trigger price_count_del
+on computerOrders
+after delete
+as
+update Orders
+set Price=(select sum(p) from (select (convert(float,price)*count) p from ComputerOrders
+join Computers on Computers.computerid=ComputerOrders.computerid
+where orderid=(select orderid from deleted))q)
+WHERE orderid =(SELECT orderid FROM deleted)
+
+update Orders
+set price=price*0.87
+where (select sum(Count) from ComputerOrders
+where orderid=(select orderid from deleted))>2
+and orderid=(select orderid from deleted)

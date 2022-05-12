@@ -1,0 +1,15 @@
+﻿create trigger PriceCount_ins_upd
+on computerOrders
+after insert, update
+as
+update Orders
+set Price=(select sum(p) from (select (price*count) p from ComputerOrders
+join Computers on Computers.computerid=ComputerOrders.computerid
+where orderid=(select orderid from inserted))q)
+WHERE orderid = (SELECT orderid FROM inserted)
+
+update Orders
+set price=price*0.87
+where (select sum(Count) from ComputerOrders
+where orderid=(select orderid from inserted))>2
+and orderid=(select orderid from inserted)

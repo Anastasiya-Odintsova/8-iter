@@ -1,0 +1,14 @@
+﻿create procedure all_del
+as
+begin
+delete Clients
+where IsDeleted=1
+delete Computers
+where IsDeleted=1
+delete Orders
+where IsDeleted=1 or orderid not in (select OrderId from ComputerOrders)
+delete Reports
+where IsDeleted=1
+delete Statuses
+where IsDeleted=1
+end;

@@ -1,0 +1,7 @@
+﻿create procedure change_price
+@percent int
+as
+begin
+update computers
+set price=convert(decimal(30, 2),price+(price*(@percent*0.01)))
+end
